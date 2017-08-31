@@ -98,18 +98,34 @@ void test_file()
     lua_getglobal(L,"tbl");   
     lua_getfield(L,-1,"id");  
     int num = lua_tonumber(L,-1);  
-    cout<<"id = "<< num <<endl;        //id = 20114442 
+    cout<<"id = "<< num <<endl;        //id = I20114442 
    
+    //2.入栈操作  
+
+
+    lua_pushstring(L, "I am so cool~");   
+    lua_pushnumber(L,20);  
+    lua_pushnumber(L,30); 
+    lua_pushnumber(L,40); 
+
+    //3.取值操作  
+	if( lua_isnumber(L,-1 )){  
+        cout<<"num2:"<<lua_tonumber(L,-1)<<endl;  
+    }  
+   if( lua_isnumber(L,-2)){  
+        cout<<"num2:"<<lua_tonumber(L,-2)<<endl;  
+    } 
+    if( lua_isnumber(L,-3)){  
+        cout<<"num1:"<<lua_tonumber(L,-3)<<endl;  
+    }  
+    if( lua_isstring(L,-4)){             //判断是否可以转为string  
+        cout<<"string :"<<lua_tostring(L,-4)<<endl;  //转为string并返回  
+    }  
+  
    
-    //至此，栈中的情况是：  
-    //=================== 栈顶 ===================   
-    //  索引  类型      值  
-    //   4   int：      30   
-    //   3   string：   shun   
-    //   2   table:     tbl  
-    //   1   string:    I am so cool~  
-    //=================== 栈底 ===================   
-   
+  
+	 
+
     //7.关闭state  
     lua_close(L);  
 }
